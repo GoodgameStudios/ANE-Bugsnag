@@ -11,7 +11,7 @@ package com.bugsnag
 
 	public class Bugsnag extends EventDispatcher
 	{
-		private static const BUGSNAG_URL:String = "https://notify.bugsnag.com";
+		private static var _notifyURL:String = "https://notify.bugsnag.com";
 
 		private static var _mExtContext:ExtensionContext = null;
 
@@ -180,7 +180,7 @@ package com.bugsnag
 			// Send request
 			var request:URLRequest = new URLRequest();
 			request.method = URLRequestMethod.POST;
-			request.url = BUGSNAG_URL;
+			request.url = _notifyURL;
 			request.data = JSON.stringify(obj);
 			_requests.request(request);
 
@@ -332,6 +332,20 @@ package com.bugsnag
 			if(_mExtContext != null)
 			{
 				_mExtContext.call("setReleaseStage", _releaseStage);
+			}
+		}
+		
+		public static function get notifyURL():String
+		{
+			return _notifyURL;
+		}
+
+
+		public static function set notifyURL(value:String):void
+		{
+			if(value)
+			{
+				_notifyURL = value;
 			}
 		}
 
