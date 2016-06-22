@@ -232,3 +232,18 @@ void ANEBugsnagFinalizer(void* extData)
 {
     
 }
+
+DEFINE_ANE_FUNCTION(setNotifyURL)
+{
+    NSString *notifyURLString = nil;
+
+    if(FREGetObjectAsString(argv[0], &notifyURLString) != FRE_OK)
+    {
+        return NULL;
+    }
+
+    NSURL *notifyURL = [[NSURL alloc] initWithString:notifyURLString];
+    [Bugsnag configuration].notifyURL = notifyURL;
+
+    return NULL;
+}

@@ -32,6 +32,7 @@ public class ANEBugsnagContext extends FREContext
 		functionMap.put("getDeviceModel", new GetDeviceModel());
 		functionMap.put("getDeviceId", new GetDeviceId());
 		functionMap.put("getDeviceManufacturer", new GetDeviceManufacturer());
+		functionMap.put("setNotifyURL", new SetEndpoint());
 
 		return functionMap;
 	}
