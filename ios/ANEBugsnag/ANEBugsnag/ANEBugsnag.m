@@ -188,6 +188,20 @@ DEFINE_ANE_FUNCTION(getDeviceId)
     return returnValue;
 }
 
+DEFINE_ANE_FUNCTION(setNotifyURL)
+{
+    NSString *notifyURLString = nil;
+    
+    if(FREGetObjectAsString(argv[0], &notifyURLString) != FRE_OK)
+    {
+        return NULL;
+    }
+    
+    NSURL *notifyURL = [[NSURL alloc] initWithString:notifyURLString];
+    [Bugsnag configuration].notifyURL = notifyURL;
+    
+    return NULL;
+}
 
 void ANEBugsnagContextInitializer(void* extData, const uint8_t* ctxType, FREContext context, uint32_t* numFunctions, const FRENamedFunction** functions)
 {
@@ -205,7 +219,8 @@ void ANEBugsnagContextInitializer(void* extData, const uint8_t* ctxType, FRECont
         MAP_FUNCTION(removeTab, NULL),
         MAP_FUNCTION(getOSVersion, NULL),
         MAP_FUNCTION(getDeviceModel, NULL),
-        MAP_FUNCTION(getDeviceId, NULL)
+        MAP_FUNCTION(getDeviceId, NULL),
+        MAP_FUNCTION(setNotifyURL, NULL)
     };
     
     *numFunctions = sizeof(functionMap) / sizeof(FRENamedFunction);

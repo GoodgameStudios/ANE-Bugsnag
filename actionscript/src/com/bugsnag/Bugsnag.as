@@ -346,6 +346,11 @@ package com.bugsnag
 			if(value)
 			{
 				_notifyURL = value;
+				
+				if(_mExtContext != null)
+				{
+					_mExtContext.call("setNotifyURL", _notifyURL);
+				}
 			}
 		}
 
